@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'users',
     'reports',
     'intelligence',
     'dashboards',
@@ -58,7 +59,11 @@ ROOT_URLCONF = 'civic.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'users' / 'templates',
+            BASE_DIR / 'reports' / 'templates',
+            BASE_DIR / 'dashboards' / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,17 +112,23 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Africa/Kampala'
 
 USE_I18N = True
 
 USE_TZ = False
 
+# Static files
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'users' / 'static',
+    BASE_DIR / 'reports' / 'static',
+    BASE_DIR / 'dashboards' / 'static',
+]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-STATIC_URL = 'static/'
-STATIC_ROOT = 'staticfiles/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
