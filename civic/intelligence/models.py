@@ -3,10 +3,8 @@ from reports.models import Report
 
 # AI results model
 
-class Issues(models.Model):
+class Results(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
-    issue_category = models.CharField(max_length=50)
-    location = models.CharField(max_length=50) #If extracted by AI
-    sentiment = models.CharField(max_length=20)
+    category = models.CharField(max_length=50)
     urgency = models.CharField(max_length=20)
-    severity = models.CharField(max_length=20)
+    location = models.CharField(max_length=50) #if from NLP
