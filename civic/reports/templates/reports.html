@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="{% static 'pic.png' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report issue - Civic Intelligence</title>
+    <title>Report Issue - Civic Intelligence</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #f4f6f9 0%, #e2e8f0 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -35,16 +35,15 @@
             max-width: 1000px;
             width: 100%;
             background: white;
-            border-radius: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
             overflow: hidden;
-            transition: transform 0.3s ease;
             padding: 3px;
         }
 
         .brand-side {
             flex: 1;
-            background: linear-gradient(145deg, #161616 0%, #2a2a2a 100%);
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
             padding: 3rem 2rem;
             display: flex;
             flex-direction: column;
@@ -55,15 +54,15 @@
         }
 
         .logo-placeholder {
-            width: 100px;
-            height: 100px;
-            background: black;
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         .logo-placeholder img {
@@ -91,6 +90,9 @@
             flex: 1;
             padding: 3rem 2.5rem;
             background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .input-group {
@@ -101,7 +103,7 @@
             display: block;
             font-size: 0.875rem;
             font-weight: 600;
-            color: #1a1a1a;
+            color: #475569;
             margin-bottom: 0.5rem;
         }
 
@@ -115,19 +117,20 @@
             position: absolute;
             left: 1rem;
             top: 1rem;
-            color: #9ca3af;
+            color: #94a3b8;
             font-size: 1.1rem;
         }
 
         .input-wrapper input, .input-wrapper textarea {
             width: 100%;
             padding: 0.875rem 1rem 0.875rem 2.75rem;
-            border: 1.5px solid #e5e7eb;
+            border: 1.5px solid #cbd5e1;
             border-radius: 12px;
             font-size: 1rem;
             font-family: 'Inter', sans-serif;
             transition: all 0.2s ease;
-            background: #fefefe;
+            background: #f8fafc;
+            color: #0f172a;
         }
 
         .input-wrapper textarea {
@@ -137,13 +140,14 @@
 
         .input-wrapper input:focus, .input-wrapper textarea:focus {
             outline: none;
-            border-color: #fe2c55;
-            box-shadow: 0 0 0 3px rgba(254, 44, 85, 0.1);
+            border-color: #0f172a;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
         }
 
         .login-btn {
             width: 100%;
-            background: #111111;
+            background: #0f172a;
             color: white;
             border: none;
             padding: 0.875rem;
@@ -157,9 +161,9 @@
         }
 
         .login-btn:hover {
-            background: #222222;
+            background: #1e293b;
             transform: translateY(-1px);
-            box-shadow: 0 8px 20px -6px rgba(254, 44, 85, 0.4);
+            box-shadow: 0 8px 20px -6px rgba(15, 23, 42, 0.3);
         }
 
         .login-btn:active {
@@ -173,11 +177,11 @@
             }
 
             .brand-side {
-                padding: 2rem;
+                padding: 2.5rem 2rem;
             }
 
             .form-side {
-                padding: 2rem 1.5rem;
+                padding: 2.5rem 1.5rem;
             }
 
             .brand-side h1 {
@@ -205,7 +209,7 @@
                     <label class="input-label">Message</label>
                     <div class="input-wrapper">
                         <i class="fas fa-inbox"></i>
-                        <textarea name="message" placeholder="Describe the issue" required></textarea>
+                        <textarea name="message" placeholder="Describe the service delivery issue in detail..." required></textarea>
                     </div>
                 </div>
 
@@ -214,7 +218,6 @@
                     <div class="input-wrapper">
                         <i class="fas fa-location-dot"></i>
                         <input id="location" type="text" name="location" placeholder="Detecting your location..." required>
-                        
                     </div>
                 </div>
                 <input id="coordinates" type="text" name="coordinates" hidden>
@@ -225,7 +228,7 @@
     </div>
 
     <script>
- window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', () => {
             getLocation();
             
             const msg = "{{ msg|escapejs }}";
@@ -252,7 +255,6 @@
                         locationInput.value = "Fetching address components...";
                         const addressText = await getPlaceName(latitude, longitude);
                         locationInput.value = addressText;
-                        
                     } else {
                         locationInput.placeholder = "Failed to pinpoint coordinates.";
                     }
@@ -281,7 +283,6 @@
                 const data = await response.json();
                 
                 if (data && data.address) {
-                    
                     const road = data.address.road || '';
                     const suburb = data.address.suburb || '';
                     const urbanArea = data.address.city || data.address.town || data.address.village || '';
@@ -293,7 +294,7 @@
                 }
             } catch (error) {
                 console.error("Error fetching reverse geocode location data:", error);
-                return 'Lookup Error)';
+                return 'Lookup Error';
             }
         }
     </script>

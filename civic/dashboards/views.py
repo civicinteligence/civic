@@ -1,9 +1,12 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from intelligence.models import Results
 from django.db.models import F
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 
+
+@login_required
 def dashboard(request):
 
     reports_qs = Results.objects.all()
