@@ -4,3 +4,6 @@
 media/
 uploads/
 staticfiles/
+__pycache__/
+.vscode/
+.idea/
