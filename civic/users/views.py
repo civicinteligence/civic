@@ -52,6 +52,8 @@ def office_login(request):
 
         if user is not None:
             login(request, user)
+            if user.issue_category == "general":
+                return redirect("all_issues")
             return redirect("dashboard")
         else:
             messages.error(request, "Invalid username or password.")

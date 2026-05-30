@@ -9,7 +9,6 @@ from intelligence.models import Results
 
 def start(report):
     text = report.message
-    place = report.location
     gps = report.gps
     
     clean_report = clean_text(text)
