@@ -15,7 +15,7 @@ def register(request):
         confirm_password = request.POST.get('confirm_password')
         phone = request.POST.get('phone')
         office_name = request.POST.get('office_name')
-        issue_category = request.POST.get('issue_category')
+        issue_category = request.POST.get('issue_category').lower().strip()
         
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username already taken! try another one')
@@ -37,6 +37,8 @@ def register(request):
         )
         
         login(request, user)
+        if issue_category == 'general':
+            return redirect('all_issues')
         return redirect('dashboard')
     return render(request, 'create_user.html')
 

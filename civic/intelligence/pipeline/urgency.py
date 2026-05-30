@@ -1,4 +1,4 @@
-higher_urgency = ["urgent","burst","danger","emergency", "broken","no", "without", "with out","help"]
+higher_urgency = ["urgent","burst", "bursts", "bursted", "danger","emergency", "broken", "burst", "no", "without", "with out","help"]
 
 
 def urgency_score(tokens):

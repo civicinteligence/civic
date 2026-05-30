@@ -18,6 +18,11 @@ kasasiro:garbage
 tewali:no
 tetulina:no
 luguddemu:broken
+lwamenyese:broken
 lumenyese:broken
 okugwamu:broken
 kugwamu:broken
+eyabise:burst
+emenyese:broken
+mutuyambe:help
+muyambe:help
