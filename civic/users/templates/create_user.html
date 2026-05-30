@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civic Registry - Create Account</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+
+<div class="register-container">
+    <h2>Civic Intelligence Office Registration</h2>
+    <p class="subtitle">Create an account to monitor public service issues.</p>
+
+    {% if messages %}
+        <div class="error-msg">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" required placeholder="e.g. John">
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" required placeholder="e.g. Doe">
+            </div>
+
+            <div class="form-group full-width">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required placeholder="Choose a unique username">
+            </div>
+
+            <div class="form-group full-width">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="name@example.com">
+            </div>
+
+            <div class="form-group full-width">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. +256...">
+            </div>
+
+            <div class="form-group">
+                <label for="office_name">Office Name</label>
+                <input type="text" id="office_name" name="office_name" placeholder="Department/Branch office">
+            </div>
+
+            <div class="form-group">
+                <label for="issue_category">Monitored Category</label>
+                <select id="issue_category" name="issue_category">
+                    <option value="general">General (All Categories)</option>
+                    <option value="water">Water</option>
+                    <option value="roads">Roads</option>
+                    <option value="health">Health</option>
+                    <option value="garbage">Garbage</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="••••••••">
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required placeholder="••••••••">
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Register Account</button>
+    </form>
+
+    <p class="login-link">Already have an account? <a href="{% url 'login' %}">Log in here</a></p>
+</div>
+
+</body>
+</html>

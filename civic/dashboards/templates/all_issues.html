@@ -7,13 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Civic Intelligence Dashboard</title>
     
-    <!-- Third-Party CDNs -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    <!-- Project Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
 
@@ -43,7 +41,6 @@
 </div>
 
 <div class="container">
-    <!-- CARDS -->
     <div class="cards">
         <div class="card">
             <div>
@@ -120,21 +117,24 @@
         </div>
     </div>
 
-    <!-- CHARTS -->
     <div class="charts">
+        <div class="chart-box">
+            <h2>
+                <i class="fa-solid fa-chart-column"></i>
+                Category Distribution
+            </h2>
+            <canvas id="categoryChart"></canvas>
+        </div>
+
         <div class="chart-box">
             <h2>
                 <i class="fa-solid fa-chart-pie"></i>
                 Urgency Distribution
             </h2>
             <canvas id="urgencyChart"></canvas>
-            {% if data.total == 0 %}
-            <strong style="display: block; margin-top: 10px;">No Issues</strong>
-            {% endif %}
         </div>
     </div>
 
-    <!-- MAP -->
     <div class="map-container">
         <h2>
             <i class="fa-solid fa-location-dot"></i>
@@ -143,7 +143,6 @@
         <div id="map"></div>
     </div>
 
-    <!-- TABLE -->
     <div class="table-container">
         <h2>
             <i class="fa-solid fa-table"></i>
@@ -164,17 +163,19 @@
     </div>
 </div>
 
-<!-- Context Injection Bridge for External JS File -->
 <script id="dashboard-data" type="application/json">
     {
         "reports": {{ data.reports|safe }},
         "highUrgency": {{ data.high_urgency|default:0 }},
-        "lowUrgency": {{ data.low_urgency|default:0 }}
+        "lowUrgency": {{ data.low_urgency|default:0 }},
+        "waterIssues": {{ data.water_issues|default:0 }},
+        "roadsIssues": {{ data.roads_issues|default:0 }},
+        "healthIssues": {{ data.health_issues|default:0 }},
+        "garbageIssues": {{ data.garbage_issues|default:0 }}
     }
 </script>
 
-<!-- Project Script Entrypoint -->
-<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/all_issues.js' %}"></script>
 
 </body>
 </html>

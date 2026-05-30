@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{% static 'pic.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Issue - Civic Intelligence</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <div id="main" class="login-container">
+        <div class="brand-side">
+            <div class="logo-placeholder">
+                <img src="{% static 'images/flag.png' %}" alt="logo">
+            </div>
+            <h1>Citizens Reporting</h1>
+            <p>Report any public services related issue below.</p>
+        </div>
+
+        <div id="form" class="form-side">
+            <form action="{% url 'submit_report' %}" method="POST">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <label class="input-label">Message</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-inbox"></i>
+                        <textarea name="message" placeholder="Describe the service delivery issue in detail..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Location</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-location-dot"></i>
+                        <input id="location" type="text" name="location" placeholder="Detecting your location..." required>
+                    </div>
+                </div>
+                <input id="coordinates" type="text" name="coordinates" hidden>
+                
+                <button type="submit" class="login-btn">Submit Report</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            getLocation();
+            
+            const msg = "{{ msg|escapejs }}";
+            if (msg && msg !== "None" && msg.trim() !== "") {
+                alert(msg);
+            }
+        });
+    </script>
+</body>
+</html>

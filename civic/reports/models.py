@@ -6,4 +6,3 @@ class Report(models.Model):
     message = models.TextField()
     location = models.CharField(max_length=50, blank=True)
     gps = models.CharField(max_length=50, blank=True)
-    photo = models.ImageField(upload_to='uploads/', blank=True)
